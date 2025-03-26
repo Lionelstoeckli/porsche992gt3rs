@@ -251,4 +251,46 @@
       font-size: 26px;
     }
   }
+
+  /* ----- Responsive Anpassungen für Smartphones ----- */
+@media (max-width: 768px) {
+    .hero-text {
+      font-size: 2rem;
+      bottom: 20px;
+      text-align: center;
+      padding: 0 10px;
+    }
+  
+    .menu-btn {
+      font-size: 26px;
+      top: 10px;
+      left: 10px;
+    }
+  
+    .sidebar {
+      width: 100%;
+      left: -100%;
+    }
+  
+    .open-sidebar .sidebar {
+      left: 0;
+    }
+  
+    .open-sidebar .content {
+      margin-left: 0;
+    }
+  
+    .detail-block img {
+      max-height: 250px;
+    }
+  
+    .quiz-question input {
+      font-size: 15px;
+    }
+  
+    .quiz-submit button {
+      width: 100%;
+    }
+  }
+  
   
