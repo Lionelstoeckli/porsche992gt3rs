@@ -100,32 +100,30 @@ if (form) {
   });
 }
 
-// Werte aus localStorage anwenden beim Laden
 window.addEventListener("DOMContentLoaded", () => {
-  const savedBg = localStorage.getItem("bgColor");
-  const savedHover = localStorage.getItem("hoverColor");
+  const defaultBg = "#008cff";
+  const defaultHover = "#033e79";
 
-  if (savedBg) {
-    document.getElementById("bgColor").value = savedBg;
-    document.querySelector(".sidebar").style.backgroundColor = savedBg;
+  const savedBg = localStorage.getItem("bgColor") || defaultBg;
+  const savedHover = localStorage.getItem("hoverColor") || defaultHover;
+
+  document.getElementById("bgColor").value = savedBg;
+  document.querySelector(".sidebar").style.backgroundColor = savedBg;
+
+  document.getElementById("hoverColor").value = savedHover;
+  document.documentElement.style.setProperty('--hover-color', savedHover);
+
+  let styleEl = document.getElementById('dynamic-hover-style');
+  if (!styleEl) {
+    styleEl = document.createElement('style');
+    styleEl.id = 'dynamic-hover-style';
+    document.head.appendChild(styleEl);
   }
 
-  if (savedHover) {
-    document.getElementById("hoverColor").value = savedHover;
-    document.documentElement.style.setProperty('--hover-color', savedHover);
-
-    let styleEl = document.getElementById('dynamic-hover-style');
-    if (!styleEl) {
-      styleEl = document.createElement('style');
-      styleEl.id = 'dynamic-hover-style';
-      document.head.appendChild(styleEl);
-    }
-
-    styleEl.innerHTML = `
-      .sidebar a:hover { background-color: ${savedHover} !important; }
-      .sidebar a.active-link { background-color: ${savedHover} !important; }
-    `;
-  }
+  styleEl.innerHTML = `
+    .sidebar a:hover { background-color: ${savedHover} !important; }
+    .sidebar a.active-link { background-color: ${savedHover} !important; }
+  `;
 });
 
 // Speichern-Funktion
@@ -159,4 +157,40 @@ function resetSettings() {
     .sidebar a:hover { background-color: ${savedHover} !important; }
     .sidebar a.active-link { background-color: ${savedHover} !important; }
   `;
+}
+
+function showSection(id) {
+  // Alle Sektionen ausblenden
+  document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+  const activeSection = document.getElementById(id);
+  if (activeSection) {
+    activeSection.classList.add("active");
+  }
+
+  // Aktiven Menüpunkt markieren
+  document.querySelectorAll(".sidebar a").forEach(link => {
+    link.classList.remove("active-link");
+    if (link.getAttribute("onclick")?.includes(id)) {
+      link.classList.add("active-link");
+    }
+  });
+
+  // Video-Handling
+  const video = document.getElementById("yt-video");
+  if (video) {
+    video.src = id === "video" ? "https://www.youtube.com/embed/nfOoWjMYtpM" : "";
+  }
+
+  // Scroll-Verhalten bei 3D Modell
+  document.body.style.overflow = id === "3dmodell" ? "hidden" : "auto";
+
+  // Sidebar schließen (bei Navigation)
+  document.body.classList.remove("open-sidebar");
+
+  // ➕ Hier kommt die zusätzliche Sichtbarkeitslogik für das 3D-Modell
+  const modellSection = document.getElementById("3dmodell");
+  if (modellSection) {
+    modellSection.style.visibility = id === "3dmodell" ? "visible" : "hidden";
+    modellSection.style.height = id === "3dmodell" ? "auto" : "0";
+  }
 }
