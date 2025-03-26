@@ -9,7 +9,7 @@
   <meta property="og:description" content="Erlebe den Porsche GT3 RS in 3D – Daten, Videos, Bilder.">
   <meta property="og:image" content="Bild/porsche-992-gt3-rs-1.webp">
   <meta property="og:type" content="website">
-  <title>Porsche 911 GT3 RS – 3D Modell, Daten & Videos</title>
+  <title>Porsche 992 GT3 RS – 3D Modell, Daten & Videos</title>
   <link rel="icon" href="Bild/22323-8-porsche-logo.png">
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
@@ -19,31 +19,51 @@
   <div class="menu-btn" onclick="toggleSidebar()">☰</div>
 
   <nav class="sidebar" id="sidebar">
-    <a href="#" onclick="showSection('startseite')">Startseite</a>
-    <a href="#" onclick="showSection('3dmodell')">3D Modell</a>
-    <a href="#" onclick="showSection('Daten')">Daten</a>
-    <a href="#" onclick="showSection('video')">Video</a>
-    <a href="#" onclick="showSection('kontakt')">Bewertung</a>
-    <a href="#" onclick="toggleSettings()">⚙️ Einstellungen</a>
-
+    <a href="#" onclick="showSection('startseite')">
+      <img src="Icons/home.png" alt="Icon" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 6px;">
+      Startseite
+    </a>
+    <a href="#" onclick="showSection('3dmodell')">
+      <img src="Icons/3d-modeling.png" alt="Icon" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 6px;">
+      3D Modell
+    </a>
+    <a href="#" onclick="showSection('Daten')">
+      <img src="Icons/notes.png" alt="Icon" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 6px;">
+      Daten
+    </a>
+    <a href="#" onclick="showSection('video')">
+      <img src="Icons/video.png" alt="Icon" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 6px;">
+      Video
+    </a>
+    <a href="#" onclick="showSection('kontakt')">
+      <img src="Icons/check-list.png" alt="Icon" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 6px;">
+      Bewertung
+    </a>
+    <a href="#" onclick="toggleSettings()">
+      ⚙️ Einstellungen
+    </a>
     <div id="settings-panel" class="settings-panel">
       <label for="bgColor">Sidebar-Farbe:</label>
       <input type="color" id="bgColor" value="#111111">
 
       <label for="hoverColor">Hover-Farbe:</label>
       <input type="color" id="hoverColor" value="#d5001c">
+      <button onclick="saveSettings()">Speichern</button>
+      <button onclick="resetSettings()">Abbrechen</button>
     </div>
   </nav>
 
   <main class="content">
     <section id="startseite" class="active">
       <div class="hero-container">
+        <div class="hero-text">Porsche 992 GT3 RS</div>
         <picture>
           <source srcset="" media="(max-width: 768px)">
           <img src="Bild/porsche-992-gt3-rs-1.webp" alt="Porsche 992 GT3 RS">
         </picture>
       </div>
     </section>
+    
 
     <section id="3dmodell">
       <model-viewer src="porsche_gt3_rs/scene.gltf" alt="Porsche GT3 RS 3D Modell" auto-rotate camera-controls shadow-intensity="1"
